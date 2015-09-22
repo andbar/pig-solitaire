@@ -11,6 +11,7 @@ class Dice:
 
 dice = Dice()
 
+
 class Player:
 
     def __init__(self):
@@ -24,24 +25,45 @@ class Player:
             return False
 
     def player_roll(self):
-        roll_result = dice.roll_result()
-        return roll_result
+        return dice.roll_result()
+
 
     def player_turn(self):
         turn_score = 0
         player_will_roll = True
+        count = 0
         while player_will_roll == True:
-            if self.player_continue() == True:
-                if self.player_roll() == 1:
+            if count == 0:
+                input("Your turn. Press any button to roll. ")
+                roll_result = self.player_roll()
+                if roll_result == 1:
                     turn_score = 0
+                    print("Sorry, you rolled a 1. You get 0 points this turn.")
                     player_will_roll = False
+                    count = 1
                 else:
-                    turn_score += self.player_roll()
+                    turn_score += roll_result
+                    print("You rolled a {}.".format(roll_result))
+                    print("You currently have {} points this turn.".format(turn_score))
+                    count = 1
             else:
-                player_will_roll = False
+                if self.player_continue() == True:
+                    roll_result = self.player_roll()
+                    if roll_result == 1:
+                        turn_score = 0
+                        print("Sorry, you rolled a 1. You get 0 points this turn.")
+                        player_will_roll = False
+                    else:
+                        turn_score += roll_result
+                        print("You rolled a {}.".format(roll_result))
+                        print("You currently have {} points this turn.".format(turn_score))
+                else:
+                    print("You added {} points to your score this turn.".format(turn_score))
+                    player_will_roll = False
         return turn_score
 
 player = Player()
+
 
 class AI:
 
@@ -75,3 +97,7 @@ class AI:
         return turn_score
 
 ai = AI()
+
+
+class Game:
+    pass
