@@ -42,3 +42,36 @@ class Player:
         return turn_score
 
 player = Player()
+
+class AI:
+
+    def __init__(self):
+        self.current_score = 0
+        self.dice = dice
+
+    def ai_continue(self):
+        cont = random.randint(0,1)
+        if cont == 1:
+            return True
+        else:
+            return False
+
+    def ai_roll(self):
+        roll_result = dice.roll_result()
+        return roll_result
+
+    def ai_turn(self):
+        turn_score = 0
+        ai_will_roll = True
+        while ai_will_roll == True:
+            if self.ai_continue() == True:
+                if self.ai_roll() == 1:
+                    turn_score = 0
+                    ai_will_roll = False
+                else:
+                    turn_score += self.ai_roll()
+            else:
+                ai_will_roll = False
+        return turn_score
+
+ai = AI()
