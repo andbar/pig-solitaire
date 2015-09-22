@@ -79,21 +79,39 @@ class AI:
             return False
 
     def ai_roll(self):
-        roll_result = dice.roll_result()
-        return roll_result
+        return dice.roll_result()
 
     def ai_turn(self):
         turn_score = 0
         ai_will_roll = True
+        count = 0
         while ai_will_roll == True:
-            if self.ai_continue() == True:
-                if self.ai_roll() == 1:
+            if count == 0:
+                roll_result = self.ai_roll()
+                if roll_result == 1:
                     turn_score = 0
+                    print("Oh, no! I've rolled a 1. I get 0 points this turn.")
                     ai_will_roll = False
+                    count = 1
                 else:
-                    turn_score += self.ai_roll()
+                    turn_score += roll_result
+                    print("I rolled a {}.".format(roll_result))
+                    print("I currently have {} points this turn.".format(turn_score))
+                    count = 1
             else:
-                ai_will_roll = False
+                if self.ai_continue() == True:
+                    roll_result = self.ai_roll()
+                    if roll_result == 1:
+                        turn_score = 0
+                        print("Oh, no! I've rolled a 1. I get 0 points this turn.")
+                        ai_will_roll = False
+                    else:
+                        turn_score += roll_result
+                        print("I rolled a {}.".format(roll_result))
+                        print("I currently have {} points this turn.".format(turn_score))
+                else:
+                    print("I added {} points to my score this turn.".format(turn_score))
+                    ai_will_roll = False
         return turn_score
 
 ai = AI()
