@@ -38,7 +38,7 @@ class Player:
                 roll_result = self.player_roll()
                 if roll_result == 1:
                     turn_score = 0
-                    print("Sorry, you rolled a 1. You get 0 points this turn.")
+                    print("Oh, no! You rolled a 1. You get 0 points this turn.")
                     player_will_roll = False
                     count = 1
                 else:
@@ -51,7 +51,7 @@ class Player:
                     roll_result = self.player_roll()
                     if roll_result == 1:
                         turn_score = 0
-                        print("Sorry, you rolled a 1. You get 0 points this turn.")
+                        print("Oh, no! You rolled a 1. You get 0 points this turn.")
                         player_will_roll = False
                     else:
                         turn_score += roll_result
@@ -90,27 +90,27 @@ class AI:
                 roll_result = self.ai_roll()
                 if roll_result == 1:
                     turn_score = 0
-                    print("Oh, no! I've rolled a 1. I get 0 points this turn.")
+                    print("Oh, no! Player 2 rolled a 1. Player 2 gets 0 points this turn.")
                     ai_will_roll = False
                     count = 1
                 else:
                     turn_score += roll_result
-                    print("I rolled a {}.".format(roll_result))
-                    print("I currently have {} points this turn.".format(turn_score))
+                    print("Player 2 rolled a {}.".format(roll_result))
+                    print("Player 2 currently has {} points this turn.".format(turn_score))
                     count = 1
             else:
                 if self.ai_continue() == True:
                     roll_result = self.ai_roll()
                     if roll_result == 1:
                         turn_score = 0
-                        print("Oh, no! I've rolled a 1. I get 0 points this turn.")
+                        print("Oh, no! Player 2 rolled a 1. Player 2 gets 0 points this turn.")
                         ai_will_roll = False
                     else:
                         turn_score += roll_result
-                        print("I rolled a {}.".format(roll_result))
-                        print("I currently have {} points this turn.".format(turn_score))
+                        print("Player 2 rolled a {}.".format(roll_result))
+                        print("Player 2 currently has {} points this turn.".format(turn_score))
                 else:
-                    print("I added {} points to my score this turn.".format(turn_score))
+                    print("Player 2 added {} points to their score this turn.".format(turn_score))
                     ai_will_roll = False
         return turn_score
 
@@ -118,4 +118,29 @@ ai = AI()
 
 
 class Game:
-    pass
+
+    def __init___(self, player, ai, rounds=7):
+        self.player1 = player
+        self.player2 = ai
+        self.players = [player1, player2]
+        self.rounds = rounds
+
+
+    def game_start(self):
+        print("Welcome to Pig Solitaire!")
+
+        pass
+
+    def player_scores(self): #tracks the current score of player
+        pass
+
+    def round_scores(self): #gives the scores from that round
+        player1_round_score = player.player_turn()
+        player2_round_score = ai.ai_turn()
+        return [player1_round_score, player2_round_score]
+
+        return round_scores
+        pass
+
+    def game_finish(self):
+        pass
